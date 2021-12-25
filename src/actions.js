@@ -14,6 +14,7 @@ import {
   PRODUCT_LIST_FAIL,
   PRODUCT_LIST_REQUEST,
   PRODUCT_LIST_SUCCESS,
+  SET_ORDERITEMS,
 } from "./constants";
 
 export const setOrderType = (dispatch, orderType) => {
@@ -55,6 +56,12 @@ export const listProducts = async (dispatch, categoryName = "") => {
   }
 };
 
+export const setOrderItems = async (dispatch) => {
+  return dispatch({
+    type: SET_ORDERITEMS,
+  });
+};
+
 export const addToOrder = async (dispatch, item) => {
   return dispatch({
     type: ORDER_ADD_ITEM,
@@ -85,7 +92,7 @@ export const setPaymentType = async (dispatch, paymentType) => {
 export const createOrder = async (dispatch, order) => {
   dispatch({ type: ORDER_CREATE_REQUEST });
   try {
-    const { data } = await Axios.post("api/orders", order);
+    const { data } = await Axios.post("/api/orders", order);
     dispatch({
       type: ORDER_CREATE_SUCCESS,
       payload: data,

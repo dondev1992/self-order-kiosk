@@ -1,14 +1,24 @@
-import React from "react";
+import React, { useContext, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import Box from "@material-ui/core/Box";
 import TouchApp from "@material-ui/icons/TouchApp";
 import Logo from "../components/Logo";
 import { useStyles } from "../styles";
 import { Card, CardActionArea, Typography } from "@material-ui/core";
+import { Store } from "../Store";
+import { clearOrder } from "../actions";
 
 export default function HomeScreen() {
+  const { state, dispatch } = useContext(Store);
   let navigate = useNavigate();
   const styles = useStyles();
+  const { orderItems } = state.order;
+
+  useEffect(() => {
+    if (!orderItems) {
+      clearOrder(dispatch);
+    }
+  }, []);
 
   return (
     <Card>

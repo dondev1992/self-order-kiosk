@@ -20,6 +20,7 @@ export default function CompleteOrderScreen() {
       createOrder(dispatch, order);
     }
   }, [order, dispatch]);
+
   return (
     <Box className={`${styles.root} ${styles.navy}`}>
       <Box className={`${styles.main} ${styles.center}`}>

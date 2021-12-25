@@ -14,9 +14,8 @@ import {
   ORDER_CREATE_REQUEST,
   ORDER_CREATE_SUCCESS,
   ORDER_CREATE_FAIL,
+  SET_ORDERITEMS,
 } from "./constants";
-
-export const Store = createContext();
 
 const initialState = {
   categoryList: { loading: true },
@@ -35,6 +34,8 @@ const initialState = {
   },
   orderList: { loading: true },
 };
+
+export const Store = createContext();
 
 function reducer(state, action) {
   switch (action.type) {
@@ -71,6 +72,11 @@ function reducer(state, action) {
       return {
         ...state,
         order: { ...state.order, paymentType: action.payload },
+      };
+    case SET_ORDERITEMS:
+      return {
+        ...state,
+        order: { ...state.order, orderItems: [] },
       };
     case ORDER_ADD_ITEM: {
       const item = action.payload;

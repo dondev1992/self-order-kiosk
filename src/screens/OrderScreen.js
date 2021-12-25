@@ -26,20 +26,13 @@ import {
   addToOrder,
   removeFromOrder,
   clearOrder,
+  setOrderItems,
 } from "../actions";
 import { useNavigate } from "react-router-dom";
 import Logo from "../components/Logo";
 import Dialog from "@material-ui/core/Dialog";
 
-export default function OrderScreen(props) {
-  const styles = useStyles();
-  const [categoryName, setCategoryName] = useState("");
-  const [quantity, setQuantity] = useState(1);
-  const [isOpen, setIsOpen] = useState(false);
-  const [product, setProduct] = useState({});
-
-  let navigate = useNavigate();
-
+export default function OrderScreen(prop) {
   const { state, dispatch } = useContext(Store);
   const { categories, loading, error } = state.categoryList;
   const {
@@ -50,11 +43,16 @@ export default function OrderScreen(props) {
 
   const { orderItems, itemsCount, totalPrice, taxPrice, orderType } =
     state.order;
+  const styles = useStyles();
+  const [categoryName, setCategoryName] = useState("");
+  const [quantity, setQuantity] = useState(1);
+  const [isOpen, setIsOpen] = useState(false);
+  const [product, setProduct] = useState({});
+
+  let navigate = useNavigate();
 
   useEffect(() => {
-    if (!orderItems) {
-      clearOrder(dispatch);
-    }
+    if (!orderItems) setOrderItems(dispatch);
   }, []);
 
   useEffect(() => {
