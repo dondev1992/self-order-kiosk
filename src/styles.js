@@ -89,4 +89,8 @@ export const useStyles = makeStyles((theme) => ({
   column: {
     flexDirection: "column",
   },
+
+  adminBtn: {
+    marginLeft: 4,
+  },
 }));

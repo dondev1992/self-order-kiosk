@@ -2,7 +2,6 @@ import { Container, CssBaseline, Paper } from "@material-ui/core";
 import { ThemeProvider } from "@material-ui/styles";
 import { createTheme } from "@material-ui/core/styles";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-
 import ChooseScreen from "./screens/ChooseScreen";
 import HomeScreen from "./screens/HomeScreen";
 import OrderScreen from "./screens/OrderScreen";
@@ -10,6 +9,10 @@ import ReviewScreen from "./screens/ReviewScreen";
 import SelectPaymentScreen from "./screens/SelectPaymentScreen";
 import PaymentScreen from "./screens/PaymentScreen";
 import CompleteOrderScreen from "./screens/CompleteOrderScreen";
+import AdminScreen from "./screens/AdminScreen";
+import { useContext } from "react";
+import { Store } from "./Store";
+import QueueScreen from "./screens/QueueScreen";
 
 const theme = createTheme({
   typography: {
@@ -34,11 +37,12 @@ const theme = createTheme({
 });
 
 function App() {
+  const { state } = useContext(Store);
   return (
     <BrowserRouter>
       <ThemeProvider theme={theme}>
         <CssBaseline />
-        <Container maxWidth="sm">
+        <Container maxWidth={state.widthScreen ? "lg" : "sm"}>
           <Paper>
             <Routes>
               <Route path="/" element={<HomeScreen />} exact={true}></Route>
@@ -70,6 +74,16 @@ function App() {
               <Route
                 path="/complete"
                 element={<CompleteOrderScreen />}
+                exact={true}
+              ></Route>
+              <Route
+                path="/admin"
+                element={<AdminScreen />}
+                exact={true}
+              ></Route>
+              <Route
+                path="/queue"
+                element={<QueueScreen />}
                 exact={true}
               ></Route>
             </Routes>
